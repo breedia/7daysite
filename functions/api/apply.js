@@ -9,22 +9,22 @@ export async function onRequestPost({request,env}) {
   const name=String(p.name||"").trim(),email=String(p.email||"").trim(),message=String(p.message||"").trim();
   if(!name||name.length>120||!/^([^\s@]+)@([^\s@]+)\.([^\s@]+)$/.test(email)||email.length>254||message.length>4000)
     return json({error:"入力内容を確認してください。"},400);
-  if(!env.RESEND_API_KEY||!env.MAIL_FROM) return json({error:"送信設定が完了していません。"},503);
+  if(!env.FORM_TOKEN) return json({error:"送信設定が完了していません。"},503);
   const safe=x=>String(x||"").replace(/[\r\n]/g," ").slice(0,200);
-  const body=[
-    "【7日サイト】新しいお申し込み","",
-    `お名前: ${name}`,`メール: ${email}`,
-    `タイプ: ${safe(p.type)}`,`開始時期: ${safe(p.slot)}`,
-    `見積もり（税込）: ${Number.isFinite(Number(p.estimate))?Math.max(0,Math.min(10000000,Number(p.estimate))):"未設定"}円`,
-    "","ご相談内容:",message||"（未記入）"
-  ].join("\n");
+  const payload={
+    token:env.FORM_TOKEN,name,email,message,
+    type:safe(p.type),slot:safe(p.slot),
+    estimate:Number.isFinite(Number(p.estimate))?Math.max(0,Math.min(10000000,Number(p.estimate))):"未設定"
+  };
   try {
-    const r=await fetch("https://api.resend.com/emails",{
-      method:"POST",
-      headers:{"Authorization":`Bearer ${env.RESEND_API_KEY}`,"Content-Type":"application/json"},
-      body:JSON.stringify({from:env.MAIL_FROM,to:["7daysite.works@gmail.com"],reply_to:email,subject:"【7日サイト】新しいお申し込み",text:body})
+    const r=await fetch("https://script.google.com/macros/s/AKfycbwL4r3zok_xMChvfss6gSHx0znGEopARodNQRjpURXsloBDJELKJUui2N-vhuZ86c1s/exec",{
+      method:"POST",headers:{"Content-Type":"text/plain; charset=utf-8"},
+      body:JSON.stringify(payload),redirect:"follow"
     });
-    if(!r.ok){ console.error("Mail provider error",r.status); return json({error:"送信処理に失敗しました。時間をおいて再度お試しください。"},502); }
+    if(!r.ok) {console.error("Apps Script HTTP error",r.status);return json({error:"送信処理に失敗しました。"},502);}
+    let result;
+    try {result=await r.json();} catch {console.error("Apps Script non-JSON response");return json({error:"送信設定を確認してください。"},502);}
+    if(result?.ok!==true) {console.error("Apps Script rejected submission");return json({error:"送信に失敗しました。"},502);}
     return json({ok:true});
-  } catch {return json({error:"通信エラーが発生しました。"},502);}
+  } catch(err) {console.error("Apps Script request failed",String(err));return json({error:"通信エラーが発生しました。"},502);}
 }
