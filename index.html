@@ -847,7 +847,7 @@ ev.preventDefault();
 var name = document.getElementById("fName");
 var mail = document.getElementById("fMail");
 var okName = markInvalid(name,!name.value.trim());
-var okMail = markInvalid(mail,!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(mail.value.trim()));
+var okMail = markInvalid(mail,!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(mail.value.trim()));
 if (!okName || !okMail) { (okName ? mail : name).focus(); summaryBox.classList.remove("show"); return; }
 var button = form.querySelector('button[type="submit"]');
 button.disabled = true; button.textContent = "送信中…";
@@ -864,13 +864,13 @@ try {
  var data = await response.json();
  if (!response.ok || !data.ok) throw new Error(data.error || "送信に失敗しました。");
  document.getElementById("resultHeading").textContent = "申し込みを受け付けました";
- summaryText.textContent = "送信完了しました。\\nお名前：" + payload.name + "\\nメール：" + payload.email + "\\n内容：" + payload.message;
+ summaryText.textContent = "送信完了しました。\nお名前：" + payload.name + "\nメール：" + payload.email + "\n内容：" + payload.message;
  summaryBox.classList.add("show");
  form.reset();
  summaryBox.scrollIntoView({behavior:"smooth",block:"nearest"});
 } catch(e) {
  document.getElementById("resultHeading").textContent = "送信できませんでした";
- summaryText.textContent = e.message + "\\nお手数ですが 7daysite.works@gmail.com へ直接お問い合わせください。";
+ summaryText.textContent = e.message + "\nお手数ですが 7daysite.works@gmail.com へ直接お問い合わせください。";
  summaryBox.classList.add("show");
 } finally { button.disabled = false; button.textContent = "申し込みを送信する"; }
 });
