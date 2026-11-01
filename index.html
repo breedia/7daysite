@@ -662,7 +662,7 @@ border-top: 1px solid var(--line);
 <div class="sec-head">
 <div class="no">07 — 申し込み・無料相談</div>
 <h2>まずは相談だけでも、どうぞ。</h2>
-<p>送信ボタンを押すとメール作成画面が開きます。内容を確認して送信してください。返信は24時間以内。「まだ漠然としている」段階の相談も歓迎です。フォームを使わずに直接メールで相談したい方は <a href="mailto:7daysite.works@gmail.com">7daysite.works@gmail.com</a> へどうぞ。</p>
+<p>入力して送信ボタンを押すだけで、お申し込みが完了します。返信は24時間以内。「まだ漠然としている」段階の相談も歓迎です。フォームを使わずに直接メールで相談したい方は <a href="mailto:7daysite.works@gmail.com">7daysite.works@gmail.com</a> へどうぞ。</p>
 </div>
 <form class="form-card" id="applyForm" novalidate>
 <div class="field" style="position:absolute;left:-9999px" aria-hidden="true"><label for="companyWebsite">ウェブサイト</label><input id="companyWebsite" name="website" tabindex="-1" autocomplete="off"></div>
@@ -859,15 +859,15 @@ var payload = {
  estimate:calcTotal(),
  website:document.getElementById("companyWebsite").value
 };
-var subject = "【7日サイト】お申し込み";
-var body = ["お名前：" + payload.name, "メール：" + payload.email, "種別：" + payload.type, "希望枠：" + payload.slot, "内容：" + payload.message, "見積：" + payload.estimate, "サイト：" + payload.website].join(String.fromCharCode(10));
-window.location.href = "mailto:7daysite.works@gmail.com?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
-document.getElementById("resultHeading").textContent = "メール作成画面を開きました";
-summaryText.textContent = "メールアプリが開かない場合は、7daysite.works@gmail.com へ下記をコピーして送信してください。" + String.fromCharCode(10) + body;
-summaryBox.classList.add("show");
+try {
+var response = await fetch("/api/apply", {method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)});
+var data = await response.json();
+if (!response.ok || !data.ok) throw new Error(data.error || "送信に失敗しました。");
+document.getElementById("resultHeading").textContent = "申し込みを受け付けました";
+summaryText.textContent = "送信完了しました。" + String.fromCharCode(10) + "お名前：" + payload.name + String.fromCharCode(10) + "メール：" + payload.email + String.fromCharCode(10) + "内容：" + payload.message; summaryBox.classList.add("show");
 form.reset();
 summaryBox.scrollIntoView({behavior:"smooth",block:"nearest"});
-button.disabled = false; button.textContent = "申し込みを送信する";
+} catch(e) { document.getElementById("resultHeading").textContent = "送信できませんでした"; summaryText.textContent = e.message + String.fromCharCode(10) + "お手数ですが 7daysite.works@gmail.com へ直接お問い合わせください。"; summaryBox.classList.add("show"); } finally { button.disabled = false; button.textContent = "申し込みを送信する"; }
 });
 document.getElementById("copyBtn").addEventListener("click", function () {
 var done = function () {
