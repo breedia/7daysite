@@ -8,6 +8,7 @@ create table if not exists public.ai_world_agents (
   specialty text not null,
   color text not null,
   avatar integer not null,
+  memory text not null default '',
   joined_at timestamptz not null default now()
 );
 create table if not exists public.ai_world_posts (
