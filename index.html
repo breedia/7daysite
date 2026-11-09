@@ -234,6 +234,19 @@ border-left: 3px solid var(--ok); border-bottom: 3px solid var(--ok); transform:
 .incl li:last-child { border-bottom: 0;}
 .plan-note { font-size: 13px; color: var(--ink-faint); margin-top: 16px;}
 
+/* small menu */
+.small-menu { margin-top: 38px;}
+.small-menu-head { margin-bottom: 20px;}
+.small-menu-head h3 { margin: 0 0 8px; font-family: "Noto Serif JP", serif; font-size: 22px; font-weight: 900; line-height: 1.5;}
+.small-menu-head p { margin: 0; color: var(--ink-soft); font-size: 15px;}
+.small-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; align-items: start;}
+@media (max-width: 900px) {.small-grid { grid-template-columns: 1fr;}}
+.small-card { background: var(--bg-raise); border: 2px solid var(--ink); border-radius: 18px; padding: 30px;}
+.small-card .plan-name { font-weight: 900; font-size: 15px; letter-spacing: 0.06em;}
+.small-card .tax { color: var(--ink-faint); font-size: 13px; margin-bottom: 18px;}
+.small-demo { margin: 20px 0 0; font-size: 15px;}
+.small-demo a { color: var(--accent); font-weight: 700;}
+
 .calc { background: var(--bg-raise); border: 1px solid var(--line); border-radius: 18px; padding: 30px;}
 .calc h3 { margin: 0 0 6px; font-size: 18px; font-weight: 900;}
 .calc > p { margin: 0 0 18px; font-size: 14px; color: var(--ink-soft);}
@@ -589,6 +602,42 @@ border-top: 1px solid var(--line);
 </div>
 </div>
 </div>
+<div class="small-menu">
+<div class="small-menu-head">
+<h3>小さな依頼向けメニュー</h3>
+<p>「まずは小さく直したい」「1ページだけ作りたい」という方向けのメニューです。基本パッケージ（30,000円）までは必要ない、という場合にどうぞ。</p>
+</div>
+<div class="small-grid">
+<div class="small-card">
+<div class="plan-name">サイト修正代行</div>
+<div class="plan-price"><small>¥</small>5,000<small>〜</small></div>
+<div class="tax">税込 ／ 納期1〜3日</div>
+<ul class="incl">
+<li>軽微な修正1件</li>
+<li>文言・写真の差し替え</li>
+<li>スマホ表示の崩れ直し</li>
+<li>電話ボタン・LINE導線の追加</li>
+<li>営業時間・料金表の更新など</li>
+</ul>
+<p class="plan-note">※ 内容を確認して、着手前に金額を確定します。構成変更やページ追加など大きな作業は別途見積もりとなり、その場合は1ページ制作や基本パッケージをご案内します。</p>
+<a class="btn btn-accent" href="#apply" style="margin-top:10px">修正代行を申し込む</a>
+</div>
+<div class="small-card">
+<div class="plan-name">1ページ制作</div>
+<div class="plan-price"><small>¥</small>9,800</div>
+<div class="tax">税込 ／ 1ページ完結</div>
+<ul class="incl">
+<li>店舗・サービスの紹介／料金／アクセス／問い合わせ導線を1ページに</li>
+<li>スマホ対応</li>
+<li>修正1回まで</li>
+<li>電話タップボタン付き</li>
+</ul>
+<p class="plan-note">※ 決済・予約システムは含みません。必要な場合は基本パッケージ（30,000円）をご案内します。</p>
+<a class="btn btn-accent" href="#apply" style="margin-top:10px">1ページ制作を申し込む</a>
+</div>
+</div>
+<p class="small-demo"><a href="demo-paint/">業種別デモ：塗装店向け1ページ制作の例を見る</a></p>
+</div>
 </div>
 </section>
 
@@ -652,6 +701,10 @@ border-top: 1px solid var(--line);
 <button class="faq-q" type="button" aria-expanded="false"><span class="qm">Q</span>パソコンが苦手でも大丈夫ですか？<span class="chev">▼</span></button>
 <div class="faq-a">はい。やり取りはメールとオンライン通話（カメラオフ可）で完結します。アカウント開設が必要な場面では、画面共有で一緒に進めます。</div>
 </div>
+<div class="faq-item">
+<button class="faq-q" type="button" aria-expanded="false"><span class="qm">Q</span>小さな修正だけでも頼めますか？<span class="chev">▼</span></button>
+<div class="faq-a">はい。サイト修正代行（5,000円〜）で対応します。軽微な修正1件・納期1〜3日で、内容を確認したうえで、着手前に金額を確定します。ページを新しく作りたい場合は、1ページ制作（9,800円）もあります。</div>
+</div>
 </div>
 </div>
 </section>
@@ -683,6 +736,8 @@ border-top: 1px solid var(--line);
 <option value="ハンドメイド通販サイト">ハンドメイド通販サイト（デモA）</option>
 <option value="同人・グッズ通販サイト">同人・グッズ通販サイト（デモB）</option>
 <option value="サロン・店舗の予約サイト">サロン・店舗の予約サイト（デモC）</option>
+<option value="サイト修正代行（5,000円〜）">サイト修正代行（5,000円〜）</option>
+<option value="1ページ制作（9,800円）">1ページ制作（9,800円）</option>
 <option value="その他・相談したい">その他・相談したい</option>
 </select>
 </div>

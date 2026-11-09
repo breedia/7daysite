@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ひたち塗装工房 | 外壁塗装・屋根塗装（架空店舗のデモサイト）</title>
+<meta name="description" content="これは架空店舗のデモサイトです（7日サイト制作例）。外壁塗装・屋根塗装・防水工事の1ページ制作例。">
+<style>
+  :root{
+    --navy:#16324f; --navy2:#1f4a73; --navy-dark:#0f2438;
+    --orange:#f07818; --orange-dark:#d9640d;
+    --bg:#f4f6f8; --card:#ffffff; --text:#24313d; --muted:#5b6b7a;
+    --line:#dbe3ea; --radius:14px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic",YuGothic,"Noto Sans JP",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    color:var(--text); background:var(--bg); line-height:1.75; font-size:16px;
+    padding-bottom:76px;
+  }
+  a{color:inherit}
+  .wrap{max-width:1020px;margin:0 auto;padding:0 20px}
+  /* demo banner */
+  .demo-banner{background:#fff3e0;border-bottom:2px solid var(--orange);color:#7a3c00;text-align:center;font-weight:700;font-size:.92rem;padding:10px 16px}
+  /* header */
+  header.site{background:var(--navy);color:#fff;position:sticky;top:0;z-index:20;box-shadow:0 2px 10px rgba(0,0,0,.18)}
+  .header-in{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 0}
+  .logo{font-size:1.3rem;font-weight:800;letter-spacing:.04em;line-height:1.3}
+  .logo small{display:block;font-size:.72rem;font-weight:600;color:#bcd0e3;letter-spacing:.12em}
+  .logo .mark{display:inline-block;background:var(--orange);color:#fff;border-radius:6px;padding:0 8px;margin-right:8px}
+  nav.main{display:none;gap:22px;font-size:.92rem;font-weight:600}
+  nav.main a{text-decoration:none;color:#e6eef6}
+  nav.main a:hover{color:#fff;text-decoration:underline}
+  .phone-box{text-align:right;line-height:1.35}
+  .phone-box .label{font-size:.72rem;color:#bcd0e3;font-weight:600}
+  .phone-box .num{font-size:1.08rem;font-weight:800;letter-spacing:.03em}
+  /* hero */
+  .hero{
+    color:#fff;
+    background:
+      linear-gradient(115deg, rgba(15,36,56,.96) 0%, rgba(22,50,79,.92) 46%, rgba(31,74,115,.78) 100%),
+      linear-gradient(160deg, var(--navy2), var(--navy));
+    overflow:hidden;position:relative;
+  }
+  .hero::after{
+    content:"";position:absolute;right:-70px;top:-70px;width:340px;height:340px;border-radius:50%;
+    background:radial-gradient(circle at 35% 35%, rgba(240,120,24,.55), rgba(240,120,24,0) 68%);
+  }
+  .hero::before{
+    content:"";position:absolute;left:0;right:0;bottom:0;height:10px;
+    background:repeating-linear-gradient(90deg,var(--orange) 0 56px,#fff 56px 64px,var(--navy2) 64px 120px);
+    opacity:.9;
+  }
+  .hero-in{position:relative;z-index:1;padding:56px 0 64px}
+  .hero .badge{display:inline-block;background:var(--orange);color:#fff;font-weight:700;font-size:.82rem;border-radius:999px;padding:4px 14px;margin-bottom:16px}
+  .hero h1{font-size:2rem;line-height:1.45;font-weight:800;max-width:640px}
+  .hero h1 .accent{color:#ffb26b}
+  .hero p.lead{margin-top:16px;max-width:600px;color:#dbe7f2;font-size:1.02rem}
+  .hero-points{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+  .hero-points span{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:6px 14px;font-size:.88rem;font-weight:600}
+  .hero-cta{margin-top:30px;display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+  .btn{display:inline-block;text-decoration:none;font-weight:800;border-radius:10px;padding:14px 26px;font-size:1rem;text-align:center}
+  .btn-orange{background:var(--orange);color:#fff;box-shadow:0 6px 16px rgba(240,120,24,.35)}
+  .btn-orange:hover{background:var(--orange-dark)}
+  .btn-ghost{background:#fff;color:var(--navy);border:2px solid #fff}
+  .hero-note{font-size:.84rem;color:#bcd0e3;margin-top:12px}
+  /* sections */
+  section{padding:56px 0}
+  section.alt{background:#fff}
+  .sec-head{text-align:center;margin-bottom:34px}
+  .sec-head .en{color:var(--orange);font-weight:800;letter-spacing:.18em;font-size:.78rem;text-transform:uppercase}
+  .sec-head h2{font-size:1.55rem;color:var(--navy);margin-top:4px}
+  .sec-head p{color:var(--muted);margin-top:8px;font-size:.95rem}
+  .grid3{display:grid;grid-template-columns:1fr;gap:18px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:26px 22px;box-shadow:0 3px 10px rgba(22,50,79,.05)}
+  .card .icon{width:52px;height:52px;border-radius:12px;background:linear-gradient(145deg,var(--navy2),var(--navy));color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.45rem;margin-bottom:14px}
+  .card h3{color:var(--navy);font-size:1.08rem;margin-bottom:8px}
+  .card p{color:var(--muted);font-size:.94rem}
+  .card .price{margin-top:12px;font-weight:800;color:var(--orange-dark)}
+  /* price table */
+  .price-table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;font-size:.95rem}
+  .price-table th,.price-table td{padding:14px 16px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+  .price-table th{background:var(--navy);color:#fff;font-weight:700;white-space:nowrap}
+  .price-table tr:last-child td{border-bottom:none}
+  .price-table td.amount{font-weight:800;color:var(--navy);white-space:nowrap}
+  .note{color:var(--muted);font-size:.86rem;margin-top:12px}
+  /* flow */
+  .flow{display:grid;grid-template-columns:1fr;gap:16px;counter-reset:step}
+  .step{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:22px;position:relative}
+  .step .no{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:50%;background:var(--orange);color:#fff;font-weight:800;margin-bottom:10px}
+  .step h3{color:var(--navy);font-size:1.02rem;margin-bottom:6px}
+  .step p{color:var(--muted);font-size:.92rem}
+  /* faq */
+  .faq-item{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px;margin-bottom:14px}
+  .faq-item .q{font-weight:800;color:var(--navy)}
+  .faq-item .q::before{content:"Q. ";color:var(--orange)}
+  .faq-item .a{color:var(--muted);margin-top:6px;font-size:.95rem}
+  .faq-item .a::before{content:"A. ";font-weight:700;color:var(--navy2)}
+  /* company */
+  .company-table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--line);font-size:.95rem}
+  .company-table th,.company-table td{padding:13px 16px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+  .company-table th{background:#eef3f7;color:var(--navy);width:34%;font-weight:700}
+  .company-table tr:last-child th,.company-table tr:last-child td{border-bottom:none}
+  /* contact */
+  .contact-box{background:linear-gradient(150deg,var(--navy),var(--navy2));color:#fff;border-radius:18px;padding:34px 24px;text-align:center}
+  .contact-box h2{font-size:1.45rem;margin-bottom:10px}
+  .contact-box p{color:#dbe7f2;font-size:.95rem;max-width:560px;margin:0 auto}
+  .contact-box .dummy-num{display:inline-block;margin-top:18px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.4);border-radius:10px;padding:10px 22px;font-weight:800;font-size:1.15rem;letter-spacing:.03em}
+  form.demo-form{max-width:560px;margin:26px auto 0;text-align:left}
+  form.demo-form label{display:block;font-size:.88rem;font-weight:700;margin:14px 0 6px;color:#e6eef6}
+  form.demo-form input,form.demo-form textarea{
+    width:100%;border:1px solid #b9c9d8;border-radius:8px;padding:11px 12px;font-size:1rem;font-family:inherit;background:#fff;color:var(--text);
+  }
+  form.demo-form textarea{min-height:96px;resize:vertical}
+  .form-note{background:#fff3e0;color:#7a3c00;border-radius:8px;padding:10px 14px;font-size:.88rem;font-weight:700;margin-top:18px;text-align:center}
+  .btn-disabled{width:100%;margin-top:16px;background:#8fa5b8;color:#eef3f7;border:none;border-radius:10px;padding:14px;font-size:1rem;font-weight:800;font-family:inherit;cursor:not-allowed}
+  /* footer */
+  footer{background:var(--navy-dark);color:#c7d6e4;padding:36px 0 28px;font-size:.88rem}
+  footer .f-logo{color:#fff;font-weight:800;font-size:1.05rem;margin-bottom:8px}
+  footer .demo-foot{margin-top:18px;padding-top:16px;border-top:1px solid rgba(255,255,255,.18);color:#9db4c8}
+  /* fixed CTA (mobile) */
+  .fixed-cta{
+    position:fixed;left:0;right:0;bottom:0;z-index:30;background:rgba(255,255,255,.97);
+    border-top:1px solid var(--line);box-shadow:0 -4px 14px rgba(22,50,79,.12);
+    padding:10px 14px calc(10px + env(safe-area-inset-bottom));
+    display:flex;align-items:center;gap:12px;
+  }
+  .fixed-cta .txt{font-size:.8rem;line-height:1.4;color:var(--muted);font-weight:600}
+  .fixed-cta .txt strong{display:block;color:var(--navy);font-size:.9rem}
+  .fixed-cta a{flex:1;background:var(--orange);color:#fff;text-decoration:none;text-align:center;font-weight:800;border-radius:10px;padding:13px 10px;font-size:1rem;box-shadow:0 4px 12px rgba(240,120,24,.35)}
+  .fixed-cta a:active{background:var(--orange-dark)}
+  @media (min-width:720px){
+    nav.main{display:flex}
+    .hero h1{font-size:2.5rem}
+    .hero-in{padding:72px 0 80px}
+    .grid3{grid-template-columns:repeat(3,1fr)}
+    .flow{grid-template-columns:repeat(4,1fr)}
+    body{padding-bottom:0}
+    .fixed-cta{display:none}
+    .contact-box{padding:44px 40px}
+  }
+</style>
+</head>
+<body>
+
+<div class="demo-banner">これは架空店舗のデモサイトです（7日サイト制作例）</div>
+
+<header class="site">
+  <div class="wrap header-in">
+    <div class="logo"><span class="mark">塗</span>ひたち塗装工房<small>HITACHI TOSOU KOUBOU</small></div>
+    <nav class="main" aria-label="メインメニュー">
+      <a href="#reasons">選ばれる理由</a>
+      <a href="#services">サービス</a>
+      <a href="#price">料金の目安</a>
+      <a href="#flow">施工の流れ</a>
+      <a href="#faq">よくある質問</a>
+    </nav>
+    <div class="phone-box" aria-label="電話番号（デモ用ダミー番号）">
+      <div class="label">お電話でのご相談（デモ用ダミー番号）</div>
+      <div class="num">0120-000-000（デモ用ダミー番号）</div>
+    </div>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="wrap hero-in">
+    <span class="badge">地域密着 ・ 見積もり無料</span>
+    <h1>住まいを長持ちさせる、<br>丁寧な<span class="accent">外壁塗装・屋根塗装</span></h1>
+    <p class="lead">色あせ・ひび割れ・カビが気になってきたら、塗り替えのサインです。ひたち塗装工房は、現地調査からお見積もりまで無料で対応し、工事内容と費用を分かりやすくご説明します。</p>
+    <div class="hero-points">
+      <span>現地調査・見積もり無料</span>
+      <span>外壁・屋根・防水に対応</span>
+      <span>工事内容を写真で報告</span>
+    </div>
+    <div class="hero-cta">
+      <a class="btn btn-orange" href="#contact">無料見積もりを相談する</a>
+      <a class="btn btn-ghost" href="#price">料金の目安を見る</a>
+    </div>
+    <p class="hero-note">※このページは架空店舗のデモサイトです。実際の受付は行っていません。</p>
+  </div>
+</div>
+
+<section id="reasons">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="en">Reasons</div>
+      <h2>選ばれる理由</h2>
+      <p>初めての塗り替えでも、安心して相談できる3つの理由です。</p>
+    </div>
+    <div class="grid3">
+      <div class="card">
+        <div class="icon" aria-hidden="true">⌂</div>
+        <h3>1. 地域密着で、すぐ相談できる</h3>
+        <p>日立市周辺を中心に対応する地域密着型だから、現地調査の日程調整もスムーズ。住まいの状態を直接見て、必要な工事だけをご提案します。</p>
+      </div>
+      <div class="card">
+        <div class="icon" aria-hidden="true">¥</div>
+        <h3>2. 見積もりは項目ごとに明朗に</h3>
+        <p>足場・洗浄・下地処理・塗装回数まで、項目ごとに内訳を記載。「一式」だけの分かりにくい見積もりにはしません。比較検討にもそのまま使えます。</p>
+      </div>
+      <div class="card">
+        <div class="icon" aria-hidden="true">✓</div>
+        <h3>3. 施工中も写真で進捗を報告</h3>
+        <p>普段は見えない下塗りや屋根の状態も、写真でご報告。工事が終わってからも、施工内容が確認できるので安心です。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="services" class="alt">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="en">Services</div>
+      <h2>サービス</h2>
+      <p>外壁・屋根・ベランダまわりまで、住まいの外側をまとめて対応します。</p>
+    </div>
+    <div class="grid3">
+      <div class="card">
+        <div class="icon" aria-hidden="true">▦</div>
+        <h3>外壁塗装</h3>
+        <p>色あせやチョーキング（手に白い粉が付く現象）、ひび割れが気になる外壁の塗り替え。下地処理から丁寧に行い、住まいの印象と耐久性を取り戻します。</p>
+      </div>
+      <div class="card">
+        <div class="icon" aria-hidden="true">△</div>
+        <h3>屋根塗装</h3>
+        <p>地上からは見えにくい屋根こそ、定期的な点検が大切です。現地調査で状態を確認し、塗装で対応できるか、補修が必要かを正直にお伝えします。</p>
+      </div>
+      <div class="card">
+        <div class="icon" aria-hidden="true">≋</div>
+        <h3>防水工事</h3>
+        <p>ベランダやバルコニーの防水層の劣化は、雨漏りの原因になります。ひび割れ・膨れが見られたら、早めの防水工事が住まいを守ります。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="price">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="en">Price</div>
+      <h2>料金の目安</h2>
+      <p>あくまで一般的な相場の目安です。正確な金額は現地調査のうえお見積もりします。</p>
+    </div>
+    <table class="price-table">
+      <tr><th>工事内容</th><th>目安</th><th>備考</th></tr>
+      <tr>
+        <td>外壁塗装（30坪の住宅）</td>
+        <td class="amount">71万円 〜 102万円程度</td>
+        <td>使用する塗料のグレードや外壁の状態、足場条件によって変動します</td>
+      </tr>
+      <tr>
+        <td>屋根塗装</td>
+        <td class="amount">別途お見積もり</td>
+        <td>屋根材の種類・勾配・劣化状況を確認してからご提示します</td>
+      </tr>
+      <tr>
+        <td>防水工事（ベランダ等）</td>
+        <td class="amount">別途お見積もり</td>
+        <td>施工面積と防水工法によって変動します</td>
+      </tr>
+      <tr>
+        <td>現地調査・お見積もり</td>
+        <td class="amount">無料</td>
+        <td>調査後に無理な営業は行いません</td>
+      </tr>
+    </table>
+    <p class="note">※上記は一般的な相場レンジを「目安」として示したものです。塗料の種類・建物の形状・劣化の程度によって金額は変わります。最終金額は現地調査後のお見積もりでご確認ください。</p>
+  </div>
+</section>
+
+<section id="flow" class="alt">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="en">Flow</div>
+      <h2>施工の流れ</h2>
+      <p>ご相談から完工まで、4つのステップで進みます。</p>
+    </div>
+    <div class="flow">
+      <div class="step">
+        <span class="no">1</span>
+        <h3>ご相談・現地調査</h3>
+        <p>お電話またはフォームからご相談ください。外壁・屋根の状態を現地で確認します（無料）。</p>
+      </div>
+      <div class="step">
+        <span class="no">2</span>
+        <h3>お見積もり・ご提案</h3>
+        <p>項目ごとの内訳と、使用する塗料の違いをご説明。内容に納得いただいてから契約となります。</p>
+      </div>
+      <div class="step">
+        <span class="no">3</span>
+        <h3>施工</h3>
+        <p>足場設置・高圧洗浄・下地処理・塗装の順に施工。進捗は写真でご報告します。近隣へのご挨拶も行います。</p>
+      </div>
+      <div class="step">
+        <span class="no">4</span>
+        <h3>完工確認・お引き渡し</h3>
+        <p>仕上がりを一緒にご確認いただき、問題がなければ足場を解体してお引き渡しです。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="en">FAQ</div>
+      <h2>よくある質問</h2>
+    </div>
+    <div class="faq-item">
+      <p class="q">見積もりだけでも大丈夫ですか？</p>
+      <p class="a">はい。現地調査とお見積もりは無料です。他社との比較検討にもそのままお使いいただけますし、その場で契約をお願いすることもありません。</p>
+    </div>
+    <div class="faq-item">
+      <p class="q">工事にはどれくらい日数がかかりますか？</p>
+      <p class="a">30坪前後の住宅の外壁塗装で、おおよそ10日〜2週間が目安です。天候や工事内容によって前後しますので、着工前にスケジュールをご案内します。</p>
+    </div>
+    <div class="faq-item">
+      <p class="q">工事中も普段どおり生活できますか？</p>
+      <p class="a">はい、基本的には普段どおりお過ごしいただけます。洗浄や塗装の工程ごとに、窓の開閉や洗濯物について事前にご案内します。</p>
+    </div>
+  </div>
+</section>
+
+<section id="company" class="alt">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="en">Company</div>
+      <h2>会社概要</h2>
+    </div>
+    <table class="company-table">
+      <tr><th>店舗名</th><td>ひたち塗装工房（架空店舗）</td></tr>
+      <tr><th>所在地</th><td>茨城県日立市○○町（架空）</td></tr>
+      <tr><th>電話番号</th><td>0120-000-000（デモ用ダミー番号）</td></tr>
+      <tr><th>対応エリア</th><td>日立市周辺（デモ表記）</td></tr>
+      <tr><th>事業内容</th><td>外壁塗装・屋根塗装・防水工事（デモ表記）</td></tr>
+      <tr><th>営業時間</th><td>9:00〜18:00（デモ表記）</td></tr>
+    </table>
+    <p class="note">※この会社概要はすべて架空のデモ表記です。実在の店舗・団体とは関係ありません。</p>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="contact-box">
+      <h2>まずは無料見積もりのご相談から</h2>
+      <p>「塗り替え時期かどうか分からない」というご相談だけでも歓迎です。現地調査で状態を確認し、必要がなければその旨を正直にお伝えします。</p>
+      <div class="dummy-num">0120-000-000（デモ用ダミー番号）</div>
+      <form class="demo-form" onsubmit="return false;" aria-label="お問い合わせフォーム（デモ）">
+        <label for="f-name">お名前</label>
+        <input id="f-name" type="text" placeholder="例）山田 太郎" autocomplete="off">
+        <label for="f-contact">ご連絡先（メールアドレス等）</label>
+        <input id="f-contact" type="text" placeholder="例）example@example.com" autocomplete="off">
+        <label for="f-msg">ご相談内容</label>
+        <textarea id="f-msg" placeholder="例）外壁の色あせが気になっています。見積もりをお願いできますか？"></textarea>
+        <p class="form-note">デモのためフォームは送信されません</p>
+        <button type="submit" class="btn-disabled" disabled>送信する（デモのため送信できません）</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="f-logo">ひたち塗装工房（架空店舗）</div>
+    <p>所在地：茨城県日立市○○町（架空） ／ 電話：0120-000-000（デモ用ダミー番号）</p>
+    <p class="demo-foot">これは架空店舗のデモサイトです（7日サイト制作例）。登場する店舗名・住所・電話番号はすべて架空のもので、実在の店舗・団体とは関係ありません。</p>
+  </div>
+</footer>
+
+<div class="fixed-cta" role="navigation" aria-label="固定お問い合わせボタン">
+  <div class="txt"><strong>見積もり無料</strong>まずは相談だけでもOK</div>
+  <a href="#contact">無料見積もりを相談する</a>
+</div>
+
+</body>
+</html>
